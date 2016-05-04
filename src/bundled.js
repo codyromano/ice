@@ -235,6 +235,11 @@ var IceLib = IceLib || {};
   }
 
   function Ice(objectName, initialProps) {
+    // Allow consumers to call Ice without constructor instantiation. 
+    // It's nicer to use when you don't have to use 'new' all the time
+    if ((this instanceof Ice) === false) {
+      return new Ice(objectName, initialProps); 
+    }
     initialProps = initialProps || {};
 
     if (typeof objectName !== 'string' || !objectName.length) {

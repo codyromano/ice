@@ -1,9 +1,8 @@
 # Ice.js
+![](http://i.imgur.com/08Q84zC.jpg)
 ## Life is too short for managing state
 
-### Overview 
-
-Life is short. Don't spend another moment writing code to persist data on the client side.
+Don't spend another moment writing code to persist data on the client side.
 
 Ice extends native JavaScript objects to make them persistent. You can change the properties of an Ice object using dot notation, as if you were dealing with a plain object, and your changes will persist in the browser.
 

@@ -17,7 +17,7 @@ main {
 }
 [contentEditable]::after {
   content: '';
-  background: url(http://findicons.com/files/icons/1671/simplicio/128/file_edit.png) no-repeat;
+  background: url(./example-edit-icon.jpg) no-repeat;
   background-size: cover;
   color: #555;
   position: absolute;

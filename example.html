@@ -17,6 +17,16 @@
 
 <script src="./src/bundled.js"></script>
 <script>
+/**
+* In this example we have a model representing a user's profile.
+* We want to remember changes to this object so that when the user 
+* reloads, her updates are still visible. 
+*
+* Normally you might write code to save or retrieve values from
+* localStorage. With Ice, you can set properties directly as 
+* if you were modifying a plain object. Ice will manage the
+* local storage for you 
+*/
 var person = new Ice('person', {
   name: 'John',
   city: 'Baltimore'
@@ -24,29 +34,41 @@ var person = new Ice('person', {
 
 function getEditableFields() {
   var editableFields = document.querySelectorAll('[contentEditable]');
+  // Conver the NodeList to an array
   return Array.prototype.slice.call(editableFields);
 }
 
-getEditableFields().forEach(function(field) {
-  // The blur event will fire when a user finishes editing content
-  field.addEventListener('blur', function() {
-    var propName = field.id,
-        newValue = field.textContent; 
+/* The MutationObserver is part of the demo. It isn't something
+you have to use with Ice. I'm using it here to watch for changes in the 
+editable fields. */
+var observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    // When an editable field is updated, grab the node ID and text content
+    var propName = mutation.target.parentElement.id,
+        newText = mutation.target.textContent;
 
-    if (person[propName]) {
-      /* Notice that there's no logic related to saving or retrieving
-      values from localStorage. To persist a change, we simply modify
-      the property directly. */
-      person[propName] = newValue; 
-    }
-  }, false); 
+    // This is where you would normally write code to set data in localStorage.
+    // Notice that Ice handles this operation behind the scenes
+    person[propName] = newText;
+  });    
+});
+
+getEditableFields().forEach(function(field) {
+  observer.observe(field, {subtree: true, characterData: true});
 });
 
 Object.keys(person).forEach(function(property) {
   var domElem = document.getElementById(property); 
   if (domElem) {
-    // To retrieve the value from localStorage, simply 
-    // refer to the property. That's it!
+    /**
+    * With Ice, you can refer to a property as if you were dealing
+    * with a plain JS object (dot or bracket notation is fine). If the object
+    * exists in localStorage, Ice will retrieve it automatically. 
+
+    * Ice also makes it easier to deal with types. By default localStorage 
+    * will return values as strings. With Ice, you can save a number or 
+    * object, and you can expect the stored value to be of the same type.
+    */
     domElem.textContent = person[property];
   }
 });

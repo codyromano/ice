@@ -1,0 +1,30 @@
+main {
+  font-family: Helvetica;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.propLabel {
+  display: inline-block;
+  width: 5rem;
+}
+.propRow {
+  padding-bottom: 1rem;
+}
+[contentEditable] {
+  display: inline-block;
+  position: relative;
+}
+[contentEditable]::after {
+  content: '';
+  background: url(http://findicons.com/files/icons/1671/simplicio/128/file_edit.png) no-repeat;
+  background-size: cover;
+  color: #555;
+  position: absolute;
+  right: -1.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+[contentEditable]:focus::after {
+  display: none;
+}

@@ -1,12 +1,53 @@
-<script src="./src/bundled.js"></script>
+<link rel="stylesheet" href="example.css" type="text/css"/>
 
+<main>
+  <h1>Profile</h1>
+
+  <!-- Properties associated with the person object below -->
+  <div class="propRow">
+    <strong class="propLabel">Name</strong>
+    <span contentEditable="true" id="name"></span>
+  </div>
+
+  <div class="propRow">
+    <strong class="propLabel">City</strong>
+    <span contentEditable="true" id="city"></span>
+  </div>
+</main>
+
+<script src="./src/bundled.js"></script>
 <script>
 var person = new Ice('person', {
   name: 'John',
-  age: 30
+  city: 'Baltimore'
 });
 
-// Try setting person.name to 'Bob' and reloading
-// the page. Notice that you can change properties directly
-// and your change will persist via localStorage
+function getEditableFields() {
+  var editableFields = document.querySelectorAll('[contentEditable]');
+  return Array.prototype.slice.call(editableFields);
+}
+
+getEditableFields().forEach(function(field) {
+  // The blur event will fire when a user finishes editing content
+  field.addEventListener('blur', function() {
+    var propName = field.id,
+        newValue = field.textContent; 
+
+    if (person[propName]) {
+      /* Notice that there's no logic related to saving or retrieving
+      values from localStorage. To persist a change, we simply modify
+      the property directly. */
+      person[propName] = newValue; 
+    }
+  }, false); 
+});
+
+Object.keys(person).forEach(function(property) {
+  var domElem = document.getElementById(property); 
+  if (domElem) {
+    // To retrieve the value from localStorage, simply 
+    // refer to the property. That's it!
+    domElem.textContent = person[property];
+  }
+});
 </script>

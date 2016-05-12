@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Ice Demo: To-do</title>
+  <link rel="stylesheet" href="./ice-todo.css" type="text/css"/>
+</head>
+<body>
+
+<main>
+  <form name="addItem">
+    <label for="newItem">Add To-Do Item</label>
+    <input type="text" name="newItem" autocomplete="off"/>
+    <button>Create</button>
+  </form>
+  <ul id="todo-list" class="items"></ul>
+</main>
+
+<script type="text/template" id="item-template">
+<div class="item-wrapper">
+  <input type="checkbox" class="item-checkbox"/>
+  <div class="item-content"></div>
+  <span class="item-remove-btn">x</span>
+</div>
+</script>
+
+<!-- I normally avoid jQuery. I'm using it here 
+only to make the example more concise. -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" 
+integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+
+<!-- Main Ice library --> 
+<script src="../../src/bundled.js"></script>
+<script src="./ice-todo.js"></script>
+
+</body>
+</html>

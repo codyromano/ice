@@ -1,0 +1,44 @@
+body {
+  font-family: Helvetica Neue;
+}
+ul {
+  padding: 0;
+}
+label {
+  font-weight: bold;
+}
+main {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.items {
+  width: 35rem;
+}
+.item-wrapper {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+.item-content, .item-remove-btn {
+  display: block;
+}
+.item-content {
+  padding-left: 1rem;
+  flex: 1;
+}
+.item-wrapper {
+  box-shadow: 2px 1px 5px 1px #eee;
+  padding: .75rem;
+}
+.item-completed .item-content {
+  text-decoration: line-through;
+  color: #ccc;
+}
+.item-remove-btn {
+  color: crimson;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
